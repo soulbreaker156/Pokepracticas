@@ -18,6 +18,9 @@ async function obtenerPokemons() {
       const contentType = response.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
         console.error(`La respuesta no es JSON para el Pokémon con ID ${i}. Respuesta: ${contentType}`);
+        // Imprimir el contenido HTML recibido para entender el error
+        const responseText = await response.text();
+        console.error(`Contenido no JSON recibido para el Pokémon con ID ${i}:`, responseText);
         continue; 
       }
 
@@ -34,11 +37,11 @@ async function obtenerPokemons() {
       } catch (error) {
         console.error(`Error al parsear JSON para el Pokémon con ID ${i}:`, error);
 
-        // Intentar imprimir el contenido para inspeccionarlo
-        const responseText = await response.text(); // Obtener la respuesta como texto
+        // Intentar obtener y mostrar el contenido de la respuesta
+        const responseText = await response.text();
         console.error(`Respuesta del servidor para el Pokémon con ID ${i}:`, responseText);
 
-        // Guardar la respuesta como texto si no es JSON
+        // Guardar la respuesta como texto para depuración en lugar de JSON
         pokemons.push({ id: i, error: 'Error al parsear JSON', response: responseText });
       }
     }
@@ -51,6 +54,7 @@ async function obtenerPokemons() {
 
     // Guardar los nuevos Pokémon en un archivo JSON con el mismo nombre
     const jsonData = JSON.stringify(pokemons, null, 2);
+    console.log('Datos que se van a guardar en el archivo JSON: ', jsonData);  // Agregar una impresión antes de guardar
     fs.writeFileSync('pokemons.json', jsonData, 'utf8');
     console.log('Archivo JSON creado con el nombre "pokemons.json"');
   } catch (error) {
