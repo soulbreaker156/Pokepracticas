@@ -1,7 +1,7 @@
 import fs from 'fs';
 import fetch from 'node-fetch'; 
 const URL = "https://pokeapi.co/api/v2/pokemon/";
-const totalPokemons = 150;
+const totalPokemons = 1025;
 const pokemons = [];
 
 // Función para obtener los Pokémon
@@ -13,8 +13,15 @@ async function obtenerPokemons() {
         console.error(`Error al obtener el Pokémon con ID ${i}: ${response.statusText}`);
         continue; 
       }
+
+      // Asegúrate de que la respuesta sea JSON
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        console.error(`La respuesta no es JSON para el Pokémon con ID ${i}`);
+        continue; 
+      }
+
       const data = await response.json();
-      // Verificar si la data es válida antes de agregarla
       if (data && data.name) {
         pokemons.push(data);
       } else {
@@ -29,7 +36,7 @@ async function obtenerPokemons() {
   }
 }
 
-// Función para guardar los datos en el archivo JSON con el mismo nombre, eliminando el archivo anterior
+// Función para guardar los datos en el archivo JSON con el mismo nombre
 function guardarEnJSON(data) {
   try {
     // Eliminar el archivo JSON si ya existe
