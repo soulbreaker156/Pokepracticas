@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/CSS/Style.css">
+
+    <title>Pokédex</title>
+</head>
+<body>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
+    </style>
+  <div class="pokemoninicio">
+    <img src="Imagenes/LogoPokemon.png" alt="LogoPokemon" class="LogoPokemon">
+  </div>
+    <header>
+       
+            <nav class="navegador">
+                <ul class="nav-list">
+                    <li class="navegador-item"><button class="btn btheader" id="vertodos">ver todos</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="normal">Normal</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="fire">fire</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="water">water</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="grass">grass</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="electric">electric</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="ice">ice</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="fighting">fighting</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="bug">bug</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="dragon">dragon</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="dark">dark</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="fairy">fairy</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="flying">flying</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="ghost">ghost</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="ground">ground</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="poison">poison</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="psychic">psychic</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="rock">rock</button></li>
+                    <li class="navegador-item"><button class="btn btheader" id="steel">steel</button></li>
+                </ul>
+               
+            </nav>
+
+            <div class="contenerbuscar">
+              <input class="busqueda" type="text" id="buscar" placeholder="Buscar por id o nombre">
+              <button class="btn buscar" id="btnbuscar">Buscar</button>
+            </div>
+    </header>
+<main>
+    <div id="todos">
+        <div class="pokemon-todos" id="listapokemon">
+        <!--    <div class="pokemon">
+                <div class="pokemon-imagen">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="bulbasur">
+                </div>
+                <div class="pokemon-info">
+                  <div class="nombre-contenedor">
+                    <p class="pokemon-id">001</p>
+                    <h2 class="pokemon-nombre">Bulbasur</h2>
+                  </div>
+                  <div class="pokemon-tipos">
+                    <p class="tipo-planta tipo">Planta</p>
+                    <p class="tipo-pelea tipo">Pelea</p>
+                  </div> 
+                  <div class="pokemon-stats">
+                    <p class="altura stat">4m</p>
+                    <p class="peso stat">64kg</p>
+                  </div> 
+                </div>
+           </div> -->
+         
+        </div>
+        <!-- Modal -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h2>Detalles del Pokémon</h2>
+    <p id="pokemon-details"></p>
+  </div>
+</div>
+   
+    </div>
+    
+</main>
+
+<script src="Js/poke.js"></script>
+</body>
+</html>
