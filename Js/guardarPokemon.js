@@ -1,7 +1,7 @@
 import fs from 'fs';
 import fetch from 'node-fetch'; 
 const URL = "https://pokeapi.co/api/v2/pokemon/";
-const totalPokemons = 1025;
+const totalPokemons = 150;
 const pokemons = [];
 
 // Función para obtener los Pokémon
@@ -21,11 +21,18 @@ async function obtenerPokemons() {
         continue; 
       }
 
-      const data = await response.json();
-      if (data && data.name) {
-        pokemons.push(data);
-      } else {
-        console.error(`Datos inválidos para el Pokémon con ID ${i}`);
+      try {
+        // Intentar parsear la respuesta como JSON
+        const data = await response.json();
+        
+        // Si los datos no son válidos, continuamos al siguiente Pokémon
+        if (data && data.name) {
+          pokemons.push(data);
+        } else {
+          console.error(`Datos inválidos para el Pokémon con ID ${i}`);
+        }
+      } catch (error) {
+        console.error(`Error al parsear JSON para el Pokémon con ID ${i}:`, error);
       }
     }
 
