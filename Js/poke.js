@@ -10,7 +10,7 @@ let valorbuscar = '';
 //Muestra todos los pokemons y los ordena en tarjetas
 async function obtenerPokemons() {
   try{
-   const response = await fetch('./Js/pokemons.json');
+   const response = await fetch('./pokemons.json');
     const data = await response.json();
      if (Array.isArray(data))  {
       pokemons.push(...data); // Agrega cada Pokémon al arreglo
