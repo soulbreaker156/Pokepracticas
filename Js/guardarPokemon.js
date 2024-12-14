@@ -13,54 +13,39 @@ async function obtenerPokemons() {
         console.error(`Error al obtener el Pokémon con ID ${i}: ${response.statusText}`);
         continue; 
       }
-
-      // Verificar si la respuesta es JSON
-      const contentType = response.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        console.error(`La respuesta no es JSON para el Pokémon con ID ${i}. Respuesta: ${contentType}`);
-        // Imprimir el contenido HTML recibido para entender el error
-        const responseText = await response.text();
-        console.error(`Contenido no JSON recibido para el Pokémon con ID ${i}:`, responseText);
-        continue; 
-      }
-
-      try {
-        // Intentar parsear la respuesta como JSON
-        const data = await response.json();
-        
-        // Si los datos son válidos, agregamos el Pokémon
-        if (data && data.name) {
-          pokemons.push(data);
-        } else {
-          console.error(`Datos inválidos para el Pokémon con ID ${i}`);
-        }
-      } catch (error) {
-        console.error(`Error al parsear JSON para el Pokémon con ID ${i}:`, error);
-
-        // Intentar obtener y mostrar el contenido de la respuesta
-        const responseText = await response.text();
-        console.error(`Respuesta del servidor para el Pokémon con ID ${i}:`, responseText);
-
-        // Guardar la respuesta como texto para depuración en lugar de JSON
-        pokemons.push({ id: i, error: 'Error al parsear JSON', response: responseText });
+      const data = await response.json();
+      // Verificar si la data es válida antes de agregarla
+      if (data && data.name) {
+        pokemons.push(data);
+      } else {
+        console.error(`Datos inválidos para el Pokémon con ID ${i}`);
       }
     }
 
+    // Guardar los nuevos Pokémon en un archivo JSON con el mismo nombre
+    guardarEnJSON(pokemons);
+  } catch (error) {
+    console.error("Error al obtener los Pokémon:", error);
+  }
+}
+
+// Función para guardar los datos en el archivo JSON con el mismo nombre, eliminando el archivo anterior
+function guardarEnJSON(data) {
+  try {
     // Eliminar el archivo JSON si ya existe
     if (fs.existsSync('pokemons.json')) {
       fs.unlinkSync('pokemons.json');
       console.log('Archivo anterior eliminado.');
     }
 
-    // Guardar los nuevos Pokémon en un archivo JSON con el mismo nombre
-    const jsonData = JSON.stringify(pokemons, null, 2);
-    console.log('Datos que se van a guardar en el archivo JSON: ', jsonData);  // Agregar una impresión antes de guardar
+    // Guardar los datos en el archivo JSON con el mismo nombre
+    const jsonData = JSON.stringify(data, null, 2);
     fs.writeFileSync('pokemons.json', jsonData, 'utf8');
     console.log('Archivo JSON creado con el nombre "pokemons.json"');
   } catch (error) {
-    console.error("Error al obtener los Pokémon:", error);
+    console.error("Error al eliminar o crear el archivo JSON:", error);
   }
 }
 
-// Llamamos a la función para obtener los Pokémon
+// Llamamos a la función para actualizar los Pokémon
 obtenerPokemons();
