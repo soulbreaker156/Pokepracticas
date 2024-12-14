@@ -1,2 +1,5 @@
 Js/pokemons.json filter=lfs diff=lfs merge=lfs -text
+<<<<<<< HEAD
 pokemons.json filter=lfs diff=lfs merge=lfs -text
+=======
+>>>>>>> 75d6917cf9ab4aa93e9923c041138b0f0a10757b
