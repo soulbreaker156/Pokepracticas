@@ -33,6 +33,13 @@ async function obtenerPokemons() {
         }
       } catch (error) {
         console.error(`Error al parsear JSON para el Pokémon con ID ${i}:`, error);
+
+        // Intentar imprimir el contenido para inspeccionarlo
+        const responseText = await response.text(); // Obtener la respuesta como texto
+        console.error(`Respuesta del servidor para el Pokémon con ID ${i}:`, responseText);
+
+        // Aquí se puede optar por seguir con el siguiente Pokémon o guardar la respuesta como texto para depuración
+        pokemons.push({ id: i, error: 'Error al parsear JSON', response: responseText });
       }
     }
 
