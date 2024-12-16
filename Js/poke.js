@@ -1,10 +1,10 @@
+
 const listapokemon = document.querySelector("#listapokemon");
 const botonesnav = document.querySelectorAll(".btheader");
 const inputbuscar = document.querySelector("#buscar");
 const botonbuscar = document.querySelector("#btnbuscar");
 const pokemons = [];
 
-let valorbuscar = '';
 
 
 //Muestra todos los pokemons y los ordena en tarjetas
@@ -174,19 +174,37 @@ botonesnav.forEach(boton => boton.addEventListener("click", (event) => {
 
 //funcion que realiza la busqueda por el id
 botonbuscar.addEventListener('click', (event) => {
-  const botonId = event.currentTarget.id;
-  const input = inputbuscar.value;
+  const input = inputbuscar.value.trim().toLowerCase();
+  let found = false;
 
-  listapokemon.innerHTML = '';
+if(!input){
   
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Debe ingresar un pokemon"
+    });
+    return;// Salir de la función sin limpiar la lista
+}
 
   pokemons.forEach(data => {
-    const id = data.id;
-    const name = data.name;
-    if (input == '' || input == id || input == name) {
-      mostrarPokemon(data);  // Muestra el Pokémon que coincida con la búsqueda
+    const id = String(data.id);
+    const name = data.name.toLowerCase();
+    if (input == id || input == name) {
+      found = true;
+      listapokemon.innerHTML = '';
+      mostrarPokemon(data);  
     }
-  });           
+  }); 
+
+  if(!found){
+      Swal.fire({
+        icon: "error",
+        title: "No se encontro un pokemon",
+        text: "Debe ingresar un pokemon valido"
+      });
+     }
+
 });
 
 obtenerPokemons();
