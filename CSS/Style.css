@@ -186,17 +186,34 @@ main {
     cursor: pointer;
 }
 
-@media screen and (min-width: 450px) {
+
+
+
+@media screen and (max-width: 755px) {
     .pokemon-todos {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
     }
 }
 
-@media screen and (min-width: 700px) {
+
+@media screen and (min-width: 756px) {
     .pokemon-todos {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        
+    
     }
 }
+
+@media screen and (min-width: 827px) {
+    .pokemon-todos {
+        grid-template-columns: 1fr 1fr 1fr;
+        
+    }
+}
+
 
 .pokemon {
     width: 100%;
